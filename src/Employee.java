@@ -49,7 +49,6 @@ public class Employee {
     }
 
     public static Employee fromJson(String json) {
-        // Simple manual parsing for the specific format
         int uid = Integer.parseInt(extract(json, "\"uid\":", ","));
         String name = unescape(extract(json, "\"name\": \"", "\""));
         LocalDate dob = LocalDate.parse(extract(json, "\"dob\": \"", "\""));

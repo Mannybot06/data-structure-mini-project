@@ -15,17 +15,15 @@ public class EmployeeOperations {
     private HashMap<Integer, Employee> employees = new HashMap<>();
     private TreeMap<String, Integer> nameIndex = new TreeMap<>();
 
-    // ADDITION
     public boolean addEmployee(Employee emp) {
         if (employees.containsKey(emp.getUid())) {
-            return false; // duplicate UID
+            return false;
         }
         employees.put(emp.getUid(), emp);
         nameIndex.put(emp.getName(), emp.getUid());
         return true;
     }
 
-    // REMOVAL
     public boolean removeEmployee(int uid) {
         Employee removed = employees.remove(uid);
         if (removed != null) {
@@ -35,14 +33,12 @@ public class EmployeeOperations {
         return false;
     }
 
-    // MODIFICATION
     public boolean updateEmployee(int uid, String newName, LocalDate newDob,
                                   String newAddress, LocalDate newOnboarding) {
 
         Employee emp = employees.get(uid);
         if (emp == null) return false;
 
-        // Update name index if name changes
         if (!emp.getName().equals(newName)) {
             nameIndex.remove(emp.getName());
             nameIndex.put(newName, uid);
@@ -56,19 +52,16 @@ public class EmployeeOperations {
         return true;
     }
 
-    // LOOKUP BY UID
     public Employee lookupByUid(int uid) {
         return employees.get(uid);
     }
 
-    // LOOKUP BY NAME
     public Employee lookupByName(String name) {
         Integer uid = nameIndex.get(name);
         if (uid == null) return null;
         return employees.get(uid);
     }
 
-    // SORTING (alphabetical by name)
     public List<Employee> getSortedEmployees() {
         List<Employee> sorted = new ArrayList<>();
         long startTime = System.currentTimeMillis();
@@ -80,7 +73,6 @@ public class EmployeeOperations {
         return sorted;
     }
 
-    // PRINTING
     public void printAll() {
         if (employees.isEmpty()) {
             System.out.println("No employees stored. Add employees with [a].");
@@ -94,7 +86,6 @@ public class EmployeeOperations {
         System.out.println("Printed in " + (endTime - startTime) + "ms");
     }
 
-    // JSON persistence
     public void saveToFile(String filename) {
         try (PrintWriter out = new PrintWriter(new FileWriter(filename))) {
             out.println("[");
@@ -124,7 +115,6 @@ public class EmployeeOperations {
                 content = content.substring(1, content.length() - 1).trim();
                 if (content.isEmpty()) return;
 
-                // Split by "}," to get individual objects, but be careful with nested braces (though not here)
                 String[] parts = content.split("\\},\\s*");
                 for (String part : parts) {
                     String json = part.trim();

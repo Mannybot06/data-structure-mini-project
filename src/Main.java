@@ -15,7 +15,7 @@ public class Main {
         System.out.println("Available operations: \na -> ADD \np -> PRINT, \nl -> LOOKUP, \nm -> MODIFY, \ns -> SORT, \nr -> REMOVE, \nq -> QUIT");
 
         while (true) {
-            System.out.print("\nEnter opeation: ");
+            System.out.print("\nEnter operation: ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.equals("q")) {
@@ -49,7 +49,7 @@ public class Main {
                     break;
 
                 case "p":
-                    System.out.println("Printing all employees:");
+                    System.out.println("All stored employees:");
                     manager.printAll();
                     break;
 
@@ -70,7 +70,7 @@ public class Main {
                     break;
 
                 case "m":
-                    System.out.println("Modify:");
+                    System.out.println("Modify employee data:");
                     try {
                         System.out.print("Enter UID of employee to modify: ");
                         int uid = Integer.parseInt(scanner.nextLine());
